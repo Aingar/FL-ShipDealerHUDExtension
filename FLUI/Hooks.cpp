@@ -100,7 +100,7 @@ void ReloadShipCount()
 bool CheckShipOverflow()
 {
 	ReloadShipCount();
-	if (currShipPage > (currBaseShipCount - 1) / 3)
+	if (currShipPage + 1 > ceilf(static_cast<float>(currBaseShipCount) / 3))
 	{
 		currShipPage = 0;
 		return false;
@@ -132,10 +132,8 @@ bool HasNextShips()
 
 void SetNextShips()
 {
-	if (CheckShipOverflow())
-	{
-		currShipPage++;
-	}
+	currShipPage++;
+	CheckShipOverflow();
 }
 
 void SetPrevShips()
